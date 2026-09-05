@@ -1,2 +1,2 @@
 # Iosep-ccn
-CCN Checker
+ccn chker

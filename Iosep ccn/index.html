@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Card Checker</h1>
+        </div>
+        
+        <div class="input-section">
+            <div class="textarea-container">
+                <textarea id="cardInput" placeholder="Paste cards or upload a .txt file.&#10;Format: cardnumber|month|year|cvv"></textarea>
+                <label for="fileUpload" class="upload-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    Upload File
+                </label>
+                <input type="file" id="fileUpload" accept=".txt" style="display: none;">
+            </div>
+            
+            <div class="controls">
+                <div class="threads-control">
+                    <label for="threads">Threads:</label>
+                    <input type="number" id="threads" value="1" min="1" max="2">
+                </div>
+                
+                <button id="startBtn" class="btn start-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    Start
+                </button>
+                
+                <button id="stopBtn" class="btn stop-btn" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="6" y="4" width="4" height="16"></rect>
+                        <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                    Stop
+                </button>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <div class="stat-box live">
+                <span class="stat-label">LIVE</span>
+                <span id="liveCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-box dead">
+                <span class="stat-label">DEAD</span>
+                <span id="deadCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-box unknown">
+                <span class="stat-label">UNKNOWN</span>
+                <span id="unknownCount" class="stat-value">0</span>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <div class="results-header">
+                <h3>Results</h3>
+                <div class="results-stats">
+                    <span class="result-stat">Live: <span id="resultLive">0</span></span>
+                    <span class="result-stat">Dead: <span id="resultDead">0</span></span>
+                    <span class="result-stat">Unknown: <span id="resultUnknown">0</span></span>
+                </div>
+            </div>
+            <div id="resultsContainer" class="results-container">
+                <div class="no-results">No results yet</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,1 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REALABENI CCN CHECKER</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                    <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+            </div>
+            <span class="brand-text">REALABENI <span class="brand-accent">CCN</span></span>
+        </div>
+
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+                <span class="theme-icon sun">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </span>
+                <span class="theme-icon moon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </span>
+            </button>
+            <button class="btn btn-generate nav-gen-btn" id="generateBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
+                <span>Generate CC</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN LAYOUT ===== -->
+    <main class="main-layout">
+
+        <!-- LEFT PANEL -->
+        <aside class="panel panel-left">
+
+            <!-- Input Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 7 4 4 20 4 20 7"/>
+                            <line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>
+                        </svg>
+                        Card Input
+                    </div>
+                    <span class="card-badge" id="inputCount">0 cards</span>
+                </div>
+                <div class="card-body">
+                    <textarea
+                        id="cardInput"
+                        class="textarea"
+                        placeholder="Paste cards here...&#10;&#10;Format: cardnumber|month|year|cvv&#10;Example: 4111111111111111|12|2026|123"
+                        spellcheck="false"
+                    ></textarea>
+                    <div class="input-hint">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        One card per line &nbsp;·&nbsp; Format: <code>card|MM|YYYY|CVV</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.07 4.93A10 10 0 0 0 4.93 19.07M4.93 4.93A10 10 0 0 1 19.07 19.07"/>
+                        </svg>
+                        Settings
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="setting-row">
+                        <label class="setting-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            Threads
+                        </label>
+                        <div class="number-input-wrap">
+                            <button class="num-btn" onclick="adjustThreads(-1)">−</button>
+                            <input type="number" id="threads" value="1" min="1" max="2" class="number-input" readonly>
+                            <button class="num-btn" onclick="adjustThreads(1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="startBtn" class="btn btn-start">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Start Check
+                </button>
+                <button id="stopBtn" class="btn btn-stop" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="6" y="4" width="4" height="16"/>
+                        <rect x="14" y="4" width="4" height="16"/>
+                    </svg>
+                    Stop
+                </button>
+            </div>
+
+            <!-- Progress Card -->
+            <div class="card progress-card" id="progressSection" style="display:none;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                        Progress
+                    </div>
+                    <span id="progressPercent" class="card-badge accent">0%</span>
+                </div>
+                <div class="card-body">
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-labels">
+                        <span id="progressText">Checking 0/0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                        Statistics
+                    </div>
+                    <button class="btn-icon" id="copyAllResultsBtn" title="Copy all results">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="stats-grid">
+                        <div class="stat-pill live">
+                            <span class="stat-dot live"></span>
+                            <span class="stat-label">Live</span>
+                            <span class="stat-num" id="liveCount">0</span>
+                        </div>
+                        <div class="stat-pill dead">
+                            <span class="stat-dot dead"></span>
+                            <span class="stat-label">Dead</span>
+                            <span class="stat-num" id="deadCount">0</span>
+                        </div>
+                        <div class="stat-pill unknown">
+                            <span class="stat-dot unknown"></span>
+                            <span class="stat-label">Unknown</span>
+                            <span class="stat-num" id="unknownCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- RIGHT PANEL -->
+        <section class="panel panel-right">
+            <div class="card results-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                        Results
+                    </div>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="live">
+                            <span class="tab-dot live"></span>Live
+                            <span class="tab-count live" id="tabLiveCount">0</span>
+                        </button>
+                        <button class="tab-btn" data-tab="dead">
+                            <span class="tab-dot dead"></span>Dead
+                            <span class="tab-count dead" id="tabDeadCount">0</span>
+                        </button>
+                        <button class="tab-btn" data-tab="unknown">
+                            <span class="tab-dot unknown"></span>Unknown
+                            <span class="tab-count unknown" id="tabUnknownCount">0</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body no-pad">
+                    <div class="tab-content active" id="liveContainer">
+                        <div class="results-container">
+                            <div class="empty-state">
+                                <div class="empty-icon">🟢</div>
+                                <p>No live cards yet</p>
+                                <small>Live cards will appear here</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="deadContainer">
+                        <div class="results-container">
+                            <div class="empty-state">
+                                <div class="empty-icon">🔴</div>
+                                <p>No dead cards yet</p>
+                                <small>Dead cards will appear here</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="unknownContainer">
+                        <div class="results-container">
+                            <div class="empty-state">
+                                <div class="empty-icon">🟡</div>
+                                <p>No unknown results yet</p>
+                                <small>Unknown/error results will appear here</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== CC GENERATOR MODAL ===== -->
+    <div id="generatorModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10"/>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                    </svg>
+                    CC Generator
+                </div>
+                <button class="modal-close close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="gen-form">
+                        <div class="field-group">
+                            <label class="field-label">BIN <span class="muted">(X = random digit)</span></label>
+                            <input type="text" id="binInput" class="field-input mono" placeholder="e.g. 553890XXXXXXXXXX" maxlength="20">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Quantity <span class="muted">(1–500)</span></label>
+                            <input type="number" id="quantity" class="field-input" value="10" min="1" max="500">
+                        </div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label">Month <span class="muted">opt.</span></label>
+                                <input type="text" id="monthInput" class="field-input mono" placeholder="07" maxlength="2">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Year <span class="muted">opt.</span></label>
+                                <input type="text" id="yearInput" class="field-input mono" placeholder="2030" maxlength="4">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">CVV <span class="muted">opt.</span></label>
+                                <input type="text" id="cvvInput" class="field-input mono" placeholder="725" maxlength="3">
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label">Format</label>
+                                <select id="formatSelect" class="field-select">
+                                    <option value="pipe">card|MM|YY|CVV</option>
+                                    <option value="space">card MM YY CVV</option>
+                                    <option value="csv">card,MM,YY,CVV</option>
+                                    <option value="json">JSON</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Card Length</label>
+                                <select id="cardLength" class="field-select">
+                                    <option value="16">16 digits</option>
+                                    <option value="15">15 digits (Amex)</option>
+                                    <option value="13">13 digits</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="gen-actions">
+                            <button id="generateCardsBtn" class="btn btn-generate full-w">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                </svg>
+                                Generate
+                            </button>
+                            <button id="clearCardsBtn" class="btn btn-ghost full-w">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+                                </svg>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gen-output">
+                        <div class="field-group stretch">
+                            <div class="output-header">
+                                <label class="field-label">Generated Cards</label>
+                                <span id="generatedCount" class="muted small">Generated: 0</span>
+                            </div>
+                            <textarea id="generatedOutput" class="textarea mono" rows="12" readonly placeholder="Generated cards will appear here..."></textarea>
+                        </div>
+                        <div class="gen-output-actions">
+                            <button id="copyGeneratedBtn" class="btn btn-ghost">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                                Copy All
+                            </button>
+                            <button id="addToCheckerBtn" class="btn btn-start">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                                Add to Checker
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NOTIFICATION ===== -->
+    <div id="notificationPopup" class="notification">
+        <div class="notification-inner">
+            <div class="notification-icon" id="notificationIcon">✓</div>
+            <div class="notification-message" id="notificationMessage">Message</div>
+            <button class="notification-close" id="notificationClose">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+    <script>
+        // Thread ± buttons
+        function adjustThreads(delta) {
+            const el = document.getElementById('threads');
+            el.value = Math.min(2, Math.max(1, parseInt(el.value || 1) + delta));
+        }
+
+        // Live card count in input badge
+        const cardInputEl = document.getElementById('cardInput');
+        const inputCountEl = document.getElementById('inputCount');
+        function updateInputCount() {
+            const n = cardInputEl.value.split('\n').filter(l => l.trim() && l.includes('|')).length;
+            inputCountEl.textContent = n + (n === 1 ? ' card' : ' cards');
+        }
+        cardInputEl.addEventListener('input', updateInputCount);
+
+        // Theme toggle (persisted)
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        html.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        themeToggle.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    </script>
+</body>
+</html>

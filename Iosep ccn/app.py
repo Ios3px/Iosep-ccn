@@ -221,7 +221,6 @@ def check_cards():
 
                 results.append(result)
 
-                time.sleep(2.5)
 
             except Exception as e:
 

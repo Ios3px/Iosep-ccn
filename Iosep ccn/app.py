@@ -128,7 +128,7 @@ def check_cards():
         import traceback
         print(f"Server error: {str(e)}")
         print(traceback.format_exc())
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)}), 1000
 
 @app.route('/check_single', methods=['POST'])
 def check_single_card():
@@ -147,7 +147,7 @@ def check_single_card():
         import traceback
         print(f"Error checking single card: {str(e)}")
         print(traceback.format_exc())
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)}), 1000
 
 @app.route('/generate', methods=['POST'])
 def generate_cards():
@@ -166,8 +166,8 @@ def generate_cards():
         
         try:
             quantity = int(quantity)
-            if quantity < 1 or quantity > 500:
-                return jsonify({'error': 'Quantity must be between 1 and 500'}), 999
+            if quantity < 1 or quantity > 1000:
+                return jsonify({'error': 'Quantity must be between 1 and 1000'}), 999
         except ValueError:
             return jsonify({'error': 'Invalid quantity'}), 999
         
@@ -191,7 +191,7 @@ def generate_cards():
         
     except Exception as e:
         import traceback
-        return jsonify({'error': f'Generation error: {str(e)}'}), 500
+        return jsonify({'error': f'Generation error: {str(e)}'}), 1000
 
 def generate_single_card(bin_input, month, year, cvv, card_length=16):
     """Generate a single credit card number with Luhn algorithm - Fixed version"""

@@ -1,4 +1,4 @@
-# IOSEP CCN CHECKER - Setup Guide
+# REALABENI CCN CHECKER - Setup Guide
 
 ## 🚀 Quick Start with ngrok (Phone Access)
 
@@ -14,13 +14,13 @@
 1. Go to https://ngrok.com/download
 2. Download Windows version
 3. Extract the zip file
-4. Move `ngrok.exe` to your project folder: `C:\Users\abene\OneDrive\Desktop\Iosep ccn`
+4. Move `ngrok.exe` to your project folder: `C:\Users\Joss\OneDrive\Desktop\realabeni ccn`
 
 ### Step 2: Start Flask Application
 1. Open Command Prompt
 2. Navigate to project folder:
    ```
-   cd "C:\Users\abene\OneDrive\Desktop\Iosep ccn"
+   cd "C:\Users\Joss\OneDrive\Desktop\realabeni ccn"
    ```
 3. Run the application:
    ```
@@ -32,7 +32,7 @@
 1. Open a NEW Command Prompt window
 2. Navigate to same project folder:
    ```
-   cd "C:\Users\abene\OneDrive\Desktop\Iosep ccn"
+   cd "C:\Users\Joss\OneDrive\Desktop\realabeni ccn"
    ```
 3. Run ngrok:
    ```
@@ -98,4 +98,4 @@ If phone and PC are on same WiFi:
 ---
 
 ## 📞 Support
-For issues or questions, Telegram: @itsmeJY
+For issues or questions, contact: @realabeni_channel

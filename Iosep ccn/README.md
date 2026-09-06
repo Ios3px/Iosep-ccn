@@ -98,4 +98,4 @@ If phone and PC are on same WiFi:
 ---
 
 ## 📞 Support
-For issues or questions, contact: @realabeni_channel
+For issues or questions, Telegram: @itsmeJY

@@ -166,8 +166,8 @@ def generate_cards():
         
         try:
             quantity = int(quantity)
-            if quantity < 1 or quantity > 1100:
-                return jsonify({'error': 'Quantity must be between 1 and 1100'}), 999
+            if quantity < 1 or quantity > 999:
+                return jsonify({'error': 'Quantity must be between 1 and 999'}), 999
         except ValueError:
             return jsonify({'error': 'Invalid quantity'}), 999
         

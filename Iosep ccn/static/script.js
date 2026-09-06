@@ -279,10 +279,10 @@ class CardChecker {
         // Format the message - use API message for dead/unknown, custom for live
         let customMessage;
         if (result.status === 'live') {
-            customMessage = `LIVE OK. [GATE_@iosepX]`;
+            customMessage = `LIVE OK. [GATE_@realabeni_channel]`;
         } else {
             // Use the actual API message for dead and unknown
-            customMessage = result.message || `UNKNOWN. [GATE_@iosepX]`;
+            customMessage = result.message || `UNKNOWN. [GATE_@realabeni_channel]`;
         }
         
         // Get country flag emoji and currency
@@ -834,7 +834,7 @@ class CardChecker {
             } else {
                 const status = result.status.toUpperCase();
                 // Use actual API message for dead/unknown, custom for live
-                const message = result.status === 'live' ? 'LIVE OK. [GATE_@iosepX]' :
+                const message = result.status === 'live' ? 'LIVE OK. [GATE_@realabeni_channel]' :
                                result.message || 'UNKNOWN';
                 resultsText += `${result.card} - ${status} - ${message}\n`;
             }

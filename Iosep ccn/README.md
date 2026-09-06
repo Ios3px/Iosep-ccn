@@ -98,4 +98,4 @@ If phone and PC are on same WiFi:
 ---
 
 ## 📞 Support
-For issues or questions, TELEGRAM: @itsmeJY
+For issues or questions, TELEGRAM: @itsMeJY

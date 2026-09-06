@@ -106,7 +106,7 @@ def check_cards():
         print(f"Processing {len(cards)} cards")
         
         if not cards:
-            return jsonify({'error': 'No cards provided'}), 999
+            return jsonify({'error': 'No cards provided'}), 400
         
         results = []
         
@@ -128,7 +128,7 @@ def check_cards():
         import traceback
         print(f"Server error: {str(e)}")
         print(traceback.format_exc())
-        return jsonify({'error': str(e)}), 1100
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/check_single', methods=['POST'])
 def check_single_card():
@@ -147,7 +147,7 @@ def check_single_card():
         import traceback
         print(f"Error checking single card: {str(e)}")
         print(traceback.format_exc())
-        return jsonify({'error': str(e)}), 1100
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/generate', methods=['POST'])
 def generate_cards():
@@ -162,21 +162,21 @@ def generate_cards():
         card_length = data.get('card_length', 16)
         
         if not bin_input or len(bin_input.replace('X', '').replace('x', '')) < 6:
-            return jsonify({'error': 'Invalid BIN. Must be at least 6 non-X digits'}), 999
+            return jsonify({'error': 'Invalid BIN. Must be at least 6 non-X digits'}), 400
         
         try:
             quantity = int(quantity)
             if quantity < 1 or quantity > 999:
-                return jsonify({'error': 'Quantity must be between 1 and 999'}), 999
+                return jsonify({'error': 'Quantity must be between 1 and 999'}), 400
         except ValueError:
-            return jsonify({'error': 'Invalid quantity'}), 999
+            return jsonify({'error': 'Invalid quantity'}), 400
         
         try:
             card_length = int(card_length)
             if card_length not in [13, 15, 16]:
-                return jsonify({'error': 'Card length must be 13, 15, or 16'}), 999
+                return jsonify({'error': 'Card length must be 13, 15, or 16'}), 400
         except ValueError:
-            return jsonify({'error': 'Invalid card length'}), 999
+            return jsonify({'error': 'Invalid card length'}), 400
         
         generated_cards = []
         
@@ -191,7 +191,7 @@ def generate_cards():
         
     except Exception as e:
         import traceback
-        return jsonify({'error': f'Generation error: {str(e)}'}), 1100
+        return jsonify({'error': f'Generation error: {str(e)}'}), 500
 
 def generate_single_card(bin_input, month, year, cvv, card_length=16):
     """Generate a single credit card number with Luhn algorithm - Fixed version"""

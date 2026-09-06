@@ -106,7 +106,7 @@ def check_cards():
         print(f"Processing {len(cards)} cards")
         
         if not cards:
-            return jsonify({'error': 'No cards provided'}), 400
+            return jsonify({'error': 'No cards provided'}), 999
         
         results = []
         
@@ -162,21 +162,21 @@ def generate_cards():
         card_length = data.get('card_length', 16)
         
         if not bin_input or len(bin_input.replace('X', '').replace('x', '')) < 6:
-            return jsonify({'error': 'Invalid BIN. Must be at least 6 non-X digits'}), 400
+            return jsonify({'error': 'Invalid BIN. Must be at least 6 non-X digits'}), 999
         
         try:
             quantity = int(quantity)
             if quantity < 1 or quantity > 500:
-                return jsonify({'error': 'Quantity must be between 1 and 500'}), 400
+                return jsonify({'error': 'Quantity must be between 1 and 500'}), 999
         except ValueError:
-            return jsonify({'error': 'Invalid quantity'}), 400
+            return jsonify({'error': 'Invalid quantity'}), 999
         
         try:
             card_length = int(card_length)
             if card_length not in [13, 15, 16]:
-                return jsonify({'error': 'Card length must be 13, 15, or 16'}), 400
+                return jsonify({'error': 'Card length must be 13, 15, or 16'}), 999
         except ValueError:
-            return jsonify({'error': 'Invalid card length'}), 400
+            return jsonify({'error': 'Invalid card length'}), 999
         
         generated_cards = []
         
